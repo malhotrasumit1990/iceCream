@@ -25,7 +25,10 @@ var AddIceCreamObj = func(iceCream model.IceCream) error {
 		return err
 	}
 
-	_, err = stmt.Exec(iceCream.Name, iceCream.ImageClosed, iceCream.ImageOpen, iceCream.Description, iceCream.Story, iceCream.SourcingValues, iceCream.Ingredients, iceCream.AllergyInfo, iceCream.DietaryCertifications, iceCream.ProductID)
+	svStr := arrayToString(iceCream.SourcingValues)
+	ingStr := arrayToString(iceCream.Ingredients)
+
+	_, err = stmt.Exec(iceCream.Name, iceCream.ImageClosed, iceCream.ImageOpen, iceCream.Description, iceCream.Story, svStr, ingStr, iceCream.AllergyInfo, iceCream.DietaryCertifications, iceCream.ProductID)
 	if err != nil {
 		log.Print(err)
 		return err
@@ -60,13 +63,18 @@ var GetAllIceCreams = func() *[]model.IceCream {
 	iceCreams := []model.IceCream{}
 
 	for rows.Next() {
+		var svStr string
+		var ingStr string
 
 		iceCream := model.IceCream{}
-		err := rows.Scan(&iceCream.Name, &iceCream.ImageClosed, &iceCream.ImageOpen, &iceCream.Description, &iceCream.Story, &iceCream.SourcingValues, &iceCream.Ingredients, &iceCream.AllergyInfo, &iceCream.DietaryCertifications, &iceCream.ProductID)
+		err := rows.Scan(&iceCream.Name, &iceCream.ImageClosed, &iceCream.ImageOpen, &iceCream.Description, &iceCream.Story, &svStr, &ingStr, &iceCream.AllergyInfo, &iceCream.DietaryCertifications, &iceCream.ProductID)
 		if err != nil {
 			log.Print(err)
 			return nil
 		}
+		iceCream.SourcingValues = stringToArray(svStr)
+		iceCream.Ingredients = stringToArray(ingStr)
+
 		iceCreams = append(iceCreams, iceCream)
 
 	}
@@ -90,12 +98,17 @@ var GetIceCreamByProductID = func(productID string) *model.IceCream {
 	defer rows.Close()
 	iceCream := model.IceCream{}
 	for rows.Next() {
+		var svStr string
+		var ingStr string
 
-		err := rows.Scan(&iceCream.Name, &iceCream.ImageClosed, &iceCream.ImageOpen, &iceCream.Description, &iceCream.Story, &iceCream.SourcingValues, &iceCream.Ingredients, &iceCream.AllergyInfo, &iceCream.DietaryCertifications, &iceCream.ProductID)
+		err := rows.Scan(&iceCream.Name, &iceCream.ImageClosed, &iceCream.ImageOpen, &iceCream.Description, &iceCream.Story, &svStr, &ingStr, &iceCream.AllergyInfo, &iceCream.DietaryCertifications, &iceCream.ProductID)
 		if err != nil {
 			log.Print(err)
 			return nil
 		}
+		iceCream.SourcingValues = stringToArray(svStr)
+		iceCream.Ingredients = stringToArray(ingStr)
 	}
+
 	return &iceCream
 }

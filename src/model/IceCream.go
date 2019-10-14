@@ -2,16 +2,16 @@ package model
 
 //IceCream model
 type IceCream struct {
-	Name                  string   `json:"name"`
-	ImageClosed           string   `json:"image_closed"`
-	ImageOpen             string   `json:"image_open"`
-	Description           string   `json:"description"`
-	Story                 string   `json:"story"`
-	SourcingValues        []string `json:"sourcing_values"`
-	Ingredients           []string `json:"ingredients"`
-	AllergyInfo           string   `json:"allergy_info"`
-	DietaryCertifications string   `json:"dietary_certifications"`
-	ProductID             string   `json:"productId"`
+	Name                  string   `json:"name,omitempty"`
+	ImageClosed           string   `json:"image_closed,omitempty"`
+	ImageOpen             string   `json:"image_open,omitempty"`
+	Description           string   `json:"description,omitempty"`
+	Story                 string   `json:"story,omitempty"`
+	SourcingValues        []string `json:"sourcing_values,omitempty"`
+	Ingredients           []string `json:"ingredients,omitempty"`
+	AllergyInfo           string   `json:"allergy_info,omitempty"`
+	DietaryCertifications string   `json:"dietary_certifications,omitempty"`
+	ProductID             string   `json:"productId,omitempty"`
 }
 
 //NewIceCream gives a new iceCream instance

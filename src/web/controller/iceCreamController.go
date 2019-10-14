@@ -25,9 +25,9 @@ var InsertIceCream = func(w http.ResponseWriter, r *http.Request) {
 	err = icObject.AddIceCreamObj(ic)
 	if err != nil {
 		fmt.Fprintf(w, "Error adding IceCream in DB . "+err.Error())
+	} else {
+		w.Write([]byte("Added"))
 	}
-	w.Write([]byte("Added"))
-
 }
 
 //GetIceCreamByProductID : is a controller method to be added in URL handler
