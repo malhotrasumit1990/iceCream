@@ -1,0 +1,47 @@
+//*****************************************************SQL SETUP Inside DOcker*********************************//
+
+Steps to setup SQL server in Docker : 
+
+1. Install Docker 
+
+	sudo apt-get -y install docker-ce
+	sudo usermod -aG docker ${USER}
+
+//at this stage Logout from your macine and Login back, to make your user as admin user for docker 
+
+2. Install Docker-Compose
+
+	//Replace username in below command
+ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+3. Go to src folder
+4. run : "docker-compose up -d" . 
+5. This will start the SQL container.
+6. Loging to the container using : 'docker exec -it "container-name" bash'
+
+7. Once inside container : 
+		run below commands
+			a. mysql -u root -p pass
+			b.  if it again prompts for password , then type "pass"
+
+8. Now once inside mysql , you can tun queries. 
+
+		1. use IceCreamsDB;
+		2. CREATE TABLE IceCreams
+	( Name varchar(50) NOT NULL,
+	  ImageClosed Text ,
+	  ImageOpen Text ,
+	  Description Text ,
+	  Story Text ,
+	  SourcingValues Text ,
+	  Ingredients Text ,
+	  AllergyInfo Text ,
+	  DietaryCertifications Text ,
+	  ProductID varchar(50) NOT NULL
+	);
+
+
+
+//****************************THIS COMPLETES YOUR SQL SETUP INSIDE DOCKER****************************//
+
+

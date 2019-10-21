@@ -1,7 +1,7 @@
 # global command
 .PHONY: all
 #all: clean dependencies platform-itsm-sync-service  pack-service
-all: clean dependencies build compile
+all: clean dependencies build compile test
 
 .PHONY: clean
 clean:
@@ -20,6 +20,13 @@ dependencies:
 .PHONY: build
 build:
 	go build -o bin/main main.go
+
+#Target to run test suits
+.PHONY: test
+test:
+	@echo "\n*************Executing testcases*************"
+	go test -coverprofile ./web/controller/cover.out -covermode=count ./web/controller
+	go test -coverprofile ./dataAccess/cover.out -covermode=count ./dataAccess
 
 .PHONY: compile
 compile:

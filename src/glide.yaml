@@ -2,6 +2,9 @@ package: github.com/parking_lot/src
 import:
 - package: github.com/go-sql-driver/mysql
 - package: github.com/dgrijalva/jwt-go 
+- package: github.com/golang/mock/mockgen
+- package: github.com/golang/mock/gomock
+- package: github.com/gorilla/context
 
 
 testImport:
