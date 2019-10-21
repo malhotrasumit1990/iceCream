@@ -6,5 +6,6 @@ const (
 	//AddICs = "/ic/insert/multiple"
 
 	GetAllIc         = "/ic/getall"
+	Token            = "/ic/token"
 	GetICByProductID = "/ic/getbyproduct/{productID}"
 )
